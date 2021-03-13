@@ -5,40 +5,58 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class Main {
 	public final static String SPLIT =" ";
-	@SuppressWarnings("unused")
 	public static void main(String args[]) throws NumberFormatException, IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
-		String line = br.readLine();
-		int numOfBooks = Integer.parseInt(line);
-		int[] prices = new int[numOfBooks];
-		int money;
-		String[] numberArrays = null;
+		List <Integer> miListaDeEnteros = new ArrayList <Integer> ();
+		String line = "0";
 		int countain = 0;
-		while(line != null) {
-			if(countain == 0) {
+			while(line != null) {
+				if(countain == 0) {
+					line = br.readLine();
+				}
+					int numOfBooks = Integer.parseInt(line);
+					int[] prices = new int[numOfBooks];
+					int money;
+					int[]position = null;
+					String[] numberArrays = null;
+					
+
+			
 				line = br.readLine();
-			}
+			
 			numberArrays = line.split(SPLIT);
 			for(int i =0; i<numOfBooks;i++) {
 				prices[i] = Integer.parseInt(numberArrays[i]);
-				System.out.println(prices[i]);
+				countain++;
+
 
 			}
 			Arrays.sort(prices);
 		
 			line= br.readLine();
 			money = Integer.parseInt(line);	
-			System.out.println("LLEGA");
 			
-		int[]position = differenceFind(prices,money);
-		System.out.println("Peter should buy books whose prices are "+position[0] +" and "+position[1]+"\n");
-		System.out.println("final");
+		position = differenceFind(prices,money);
+		Integer value1 = position[0];
+		Integer value2 = position[1];
+		miListaDeEnteros.add(value1);
+		miListaDeEnteros.add(value2);
+		
+		
+		
 		line= br.readLine();
+		line= br.readLine();
+		countain++;
+		}
+		for(int i = 0; i<miListaDeEnteros.size();i+= 2) {
+		System.out.println("Peter should buy books whose prices are "+miListaDeEnteros.get(i) +" and "+miListaDeEnteros.get(i+1)+"\n");
 		}
 		br.close();
 		wr.close();
