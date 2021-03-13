@@ -18,10 +18,8 @@ public class Main {
 		int[] prices = new int[numOfBooks];
 		int money;
 		String[] numberArrays = null;
-		System.out.println("llego");
 		int countain = 0;
 		while(line != null) {
-			System.out.println(numOfBooks+"----");
 			if(countain == 0) {
 				line = br.readLine();
 			}
@@ -31,18 +29,55 @@ public class Main {
 				System.out.println(prices[i]);
 
 			}
-			System.out.println("salio");
 			Arrays.sort(prices);
-			System.out.println("se quedo");
+		
 			line= br.readLine();
-			System.out.println("se niooni");
-			money = Integer.parseInt(line);
-			System.out.println(money+"adasd");
-			line= br.readLine();
-			System.out.println(money+"adasd");
-			countain ++;
+			money = Integer.parseInt(line);	
+			System.out.println("LLEGA");
+			
+		int[]position = differenceFind(prices,money);
+		System.out.println("Peter should buy books whose prices are "+position[0] +" and "+position[1]+"\n");
+		System.out.println("final");
+		line= br.readLine();
 		}
 		br.close();
-
+		wr.close();
+	}
+	public static int binarySerch(int[] values, int cash){
+		int i= 0;
+		int j = values.length-1;
+		int fond = -1;
+		int m =0;
+		while(fond<0 && i<=j) {
+			m = (i+j)/2;
+			if(values[m] == cash) {
+				fond = m;
+			}else if(values[m]>cash) {
+				j=m-1;
+			}else {
+				i=m+1;
+			}
+		}
+		return fond;
+		
+	}
+	public static int[] differenceFind(int []values, int cash ) {
+		int diference = 0;
+		int temporal = Integer.MAX_VALUE;
+		int[]positions = new int[2];
+		for(int i=0;i<values.length;i++) {
+			if(binarySerch(values,(cash-values[i]))>=0) {
+				if(values[i]-values[binarySerch(values,(cash-values[i]))]<Integer.MAX_VALUE) {
+					diference = Math.abs(values[i]-values[binarySerch(values,(cash-values[i]))]);
+					if((temporal)>(diference)) {
+						temporal = diference;
+						positions[0] = values[i];
+						positions[1]= values[binarySerch(values,(cash-values[i]))];
+					}
+				}
+			}
+		}
+		return positions;
+		
 	}
 }
