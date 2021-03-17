@@ -5,13 +5,16 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 
 public class Main {
 	private static int[] prices;
 	public final static String SPLIT =" ";
 	public static void main(String args[]) throws NumberFormatException, IOException {
+		List<Integer> miLista = new ArrayList<Integer>();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter wr = new BufferedWriter(new OutputStreamWriter(System.out));
 		String line =  br.readLine();
@@ -34,10 +37,14 @@ public class Main {
 			int money = Integer.parseInt(line);	
 
 		position= binarySerch(money,numOfBooks,prices);
-		wr.write("Peter should buy books whose prices are "+position[0]+" and "+position[1]+".\n\n");
+		miLista.add(position[0]);
+		miLista.add(position[1]);
 		line= br.readLine();
 		line= br.readLine();
 		}
+			for(int i=0;i<miLista.size();i+=2) {
+				wr.write("Peter should buy books whose prices are "+miLista.get(i)+" and "+miLista.get(i+1)+".\n\n");
+				}
 		
 		br.close();
 		wr.close();
